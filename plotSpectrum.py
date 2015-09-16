@@ -7,6 +7,8 @@ if __name__ == '__main__':
     spectrum = spkspectrum.SpkSpectrum(fileName)
     data = spectrum.read(830)
     dataToPlot = data[16:]
+    dataAveraged = spectrum.movingAverage5()
     plt.plot(dataToPlot)
+    plt.plot(dataAveraged)
     plt.xlabel('spectrum ' + fileName)
     plt.show()
