@@ -1,6 +1,6 @@
 __author__ = 'jan'
 
-class Peak:
+class SpectrumPeak:
     def __init__(self):
         self.maxValue = 0
         self.maxPosition = -1

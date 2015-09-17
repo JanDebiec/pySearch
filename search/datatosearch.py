@@ -1,5 +1,15 @@
+# from search import spectrumpeak
+
 __author__ = 'jan'
 
+class SpectrumPeak:
+    def __init__(self):
+        self.maxValue = 0
+        self.maxPosition = -1
+        self.leftBorder = -1
+        self.leftBorderValue = 0
+        self.rightBorder = -1
+        self.rightBorderValue = 0
 
 class DataToSearch:
     def __init__(self, data, peakSeparation = 6):
@@ -12,11 +22,19 @@ class DataToSearch:
         self.peakSeparation = peakSeparation
 
     def level0(self):
+        '''
+
+        :return:
+        '''
         self.actStart = 0
         self.actEnd = self.end
-        peak = peak.peak
+        peak = SpectrumPeak()
         self.peaks.append(peak)
-        self.firstSearchToRight(0)
+        valid = self.firstSearchToRight()
+        if valid == 0: # ok
+            return 0
+        else:
+            return -1
 
 
 
@@ -51,14 +69,18 @@ class DataToSearch:
 
 
 
-    def validatePeak(selfposition):
+    def validatePeak(self, position):
         '''
+        check if position of peak, far enough from the search borders
 
-
-        :rtype : bool
         :param selfposition:
+        :rtype : bool
         :return: bool, True if valid
         '''
+        if (position - self.actStart) < self.peakSeparation:
+            return False
+        if (self.actEnd - position) < self.peakSeparation:
+            return False
         return True
 
 
