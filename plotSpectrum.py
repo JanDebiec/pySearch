@@ -17,7 +17,9 @@ if __name__ == '__main__':
 
     # create search class
     searching = datatosearch.DataToSearch(dataAveraged)
-    valid = searching.level0()
+    valid0 = searching.level0()
+    if valid0 == 0:
+        valid1 = searching.level1()
 
     x0 = searching.peaks[0].maxPosition
     y0 = searching.peaks[0].maxValue
