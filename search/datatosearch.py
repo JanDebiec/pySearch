@@ -59,8 +59,13 @@ class DataToSearch:
         self.actStart = self.peaks[0].maxPosition
         self.actEnd = self.start
         validL = self.searchToLeft(1, 0)
-        return validL
 
+        # search from peak0 to right, to end
+        self.actStart = self.peaks[0].maxPosition
+        self.actEnd = self.end
+        validLR = self.searchToRight(2, 0)
+
+        return validL
 
     def searchToLeft(self, indexToFind, indexToUpdate):
         peak = SpectrumPeak()
@@ -138,4 +143,32 @@ class DataToSearch:
 
 
     def searchToRight(self, indexToFind, indexToUpdate):
-        pass
+        peak = SpectrumPeak()
+        self.peaks.append(peak)
+        retValue = -1
+        i = self.actStart
+        maxValue = 0
+        maxPosition = -1
+        firstMinimum = self.peaks[indexToUpdate].maxValue
+        firstMinimumPosition = self.peaks[indexToUpdate].maxPosition
+        firstMinimumFound = False
+        while i < self.actEnd:
+            value = self.data[i]
+            if not firstMinimumFound:
+                if value <= firstMinimum:
+                    firstMinimum = value
+                    firstMinimumPosition = i
+                else:
+                    firstMinimumFound = True
+                    retValue = 0
+            else:
+                if value > maxValue:
+                    maxValue = value
+                    maxPosition = i
+            i = i + 1
+        valid = self.validatePeak(maxPosition)
+        if valid:
+            self.peaks[indexToFind].maxPosition = maxPosition
+            self.peaks[indexToFind].maxValue = maxValue
+            self.peaks[indexToFind].valid = True
+        return retValue
