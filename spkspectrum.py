@@ -20,6 +20,8 @@ class SpkSpectrum:
                 self.data.append(value)
             i = i + 1
         self.dataSize = len(self.data)
+        for y in range(20):
+            self.data[y] = 0
         return self.data
 
     def movingAverage5(self):

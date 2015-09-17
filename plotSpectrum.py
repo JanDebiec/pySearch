@@ -10,11 +10,11 @@ if __name__ == '__main__':
     fileName = 'spectra/0016_Schichtdicke,konfokal_14kHz_LAI100.spk'
     spectrum = spkspectrum.SpkSpectrum(fileName)
     data = spectrum.read(830)
-    dataToPlot = data
+    dataToPlot = data[:]
 
     # moving average size 5, odd can be better to understand, worse to divide
     dataAveraged = spectrum.movingAverage5()
-
+    dataAveragedToPlot = dataAveraged[:]
     # create search class
     searching = datatosearch.DataToSearch(dataAveraged)
     valid0 = searching.level0()
@@ -26,7 +26,10 @@ if __name__ == '__main__':
 
     # plot results
     plt.plot(dataToPlot)
-    plt.plot(dataAveraged)
+    plt.plot(dataAveragedToPlot)
     plt.plot(x0, y0, "r")
     plt.xlabel('spectrum ' + fileName)
+    plt.xlim(0, 1000)
+    plt.ylim(0, 10000)
+    plt.scatter(x0, y0, 20, color='red')
     plt.show()
