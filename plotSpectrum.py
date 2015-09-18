@@ -1,6 +1,4 @@
-# from search import datatosearch
 from search import datatosearch
-# from search.datatosearch import *
 
 __author__ = 'jan'
 import spkspectrum
