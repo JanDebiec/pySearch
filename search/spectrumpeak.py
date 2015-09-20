@@ -8,3 +8,4 @@ class SpectrumPeak:
         self.leftBorderValue = 0
         self.rightBorder = -1
         self.rightBorderValue = 0
+        self.valid = False
