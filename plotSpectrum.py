@@ -1,13 +1,16 @@
-# from search import datatosearch
+import sys
 from search import datatosearch
-# from search.datatosearch import *
 
 __author__ = 'jan'
 import spkspectrum
 import matplotlib.pyplot as plt
 
 if __name__ == '__main__':
-    fileName = 'spectra/0016_Schichtdicke,konfokal_14kHz_LAI100.spk'
+    print sys.argv
+
+    # fileName = 'spectra/0016_Schichtdicke,konfokal_14kHz_LAI100.spk'
+    # filename os parameter, runs only in pyCharm
+    # from console, calleing python plt...py does't work
     spectrum = spkspectrum.SpkSpectrum(fileName)
     data = spectrum.read(830)
     dataToPlot = data[:]
