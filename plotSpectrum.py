@@ -8,8 +8,8 @@ import matplotlib.pyplot as plt
 if __name__ == '__main__':
     print sys.argv
 
-    # fileName = 'spectra/0016_Schichtdicke,konfokal_14kHz_LAI100.spk'
-    fileName = sys.argv[1]
+    fileName = 'spectra/0016_Schichtdicke,konfokal_14kHz_LAI100.spk'
+    # fileName = sys.argv[1]
     # filename os parameter, runs only in pyCharm
     # from console, calleing python plt...py does't work
     spectrum = spkspectrum.SpkSpectrum(fileName)
