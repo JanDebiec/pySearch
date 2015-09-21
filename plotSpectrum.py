@@ -18,9 +18,18 @@ if __name__ == '__main__':
     valid0 = searching.level0()
     if valid0 == 0:
         valid1 = searching.level1()
+        searching.level2()
 
     x0 = searching.peaks[0].maxPosition
     y0 = searching.peaks[0].maxValue
+
+    x1 = searching.peaks[1].maxPosition
+    y1 = searching.peaks[1].maxValue
+
+    x2 = searching.peaks[2].maxPosition
+    y2 = searching.peaks[2].maxValue
+
+
 
     # plot results
     plt.plot(dataToPlot)
@@ -29,5 +38,7 @@ if __name__ == '__main__':
     plt.xlabel('spectrum ' + fileName)
     plt.xlim(0, 1000)
     plt.ylim(0, 10000)
-    plt.scatter(x0, y0, 20, color='red')
-    plt.show()
+    plt.scatter(x0, y0, 30, color='red')
+    plt.scatter(x1, y1, 30, color='green')
+    plt.scatter(x2, y2, 30, color='blue')
+plt.show()

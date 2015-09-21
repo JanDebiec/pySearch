@@ -13,7 +13,12 @@ class DataToSearch:
         self.peaks = []
         self.peakSeparation = peakSeparation
         self.valid0 = -1
-        self.valid1 = -1
+        self.valid11 = -1
+        self.valid12 = -1
+        self.valid21 = -1
+        self.valid22 = -1
+        self.valid23 = -1
+        self.valid24 = -1
 
     def level0(self):
         '''
@@ -49,14 +54,14 @@ class DataToSearch:
         # search from peak0 to left, to start
         self.actStart = self.peaks[0].maxPosition
         self.actEnd = self.start
-        validL = self.searchToLeft(1, 0)
+        self.valid11 = self.searchToLeft(1, 0)
 
         # search from peak0 to right, to end
         self.actStart = self.peaks[0].maxPosition
         self.actEnd = self.end
-        validLR = self.searchToRight(2, 0)
+        self.valid12 = self.searchToRight(2, 0)
 
-        return validL
+        return (self.valid11 + self.valid12)
 
     def level2(self):
         '''
@@ -64,9 +69,25 @@ class DataToSearch:
         :return:
         '''
         # search from peak 1 to left
+        self.actStart = self.peaks[1].maxPosition
+        self.actEnd = self.start
+        self.valid21 = self.searchToLeft(3, 1)
+
         # search from peak 1 to right, to peak 0
-        # search from peak 2 to left, yo peak 0
-        # search frm peak 2 to right, to end
+        self.actStart = self.peaks[1].maxPosition
+        self.actEnd = self.peaks[0].leftBorder
+        self.valid22 = self.searchToRight(4, 1)
+
+        # search from peak 2 to left, to peak 0
+        self.actStart = self.peaks[2].maxPosition
+        self.actEnd = self.peaks[0].rightBorder
+        self.valid23 = self.searchToLeft(5, 2)
+
+        # search fr0m peak 2 to right, to end
+        self.actStart = self.peaks[2].maxPosition
+        self.actEnd = self.end
+        self.valid24 = self.searchToRight(6, 2)
+
         # validate peaks 1 and 2
         # find higher from both
 
