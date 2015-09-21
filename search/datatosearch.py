@@ -58,6 +58,18 @@ class DataToSearch:
 
         return validL
 
+    def level2(self):
+        '''
+
+        :return:
+        '''
+        # search from peak 1 to left
+        # search from peak 1 to right, to peak 0
+        # search from peak 2 to left, yo peak 0
+        # search frm peak 2 to right, to end
+        # validate peaks 1 and 2
+        # find higher from both
+
     def searchToLeft(self, indexToFind, indexToUpdate):
         peak = SpectrumPeak()
         self.peaks.append(peak)
