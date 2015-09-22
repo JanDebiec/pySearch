@@ -23,11 +23,24 @@ if __name__ == '__main__':
     searching = datatosearch.DataToSearch(dataAveraged)
     valid0 = searching.level0()
     if valid0 == 0:
-        valid1 = searching.level1()
+        [valid11, valid12] = searching.level1()
         searching.level2()
 
     x0 = searching.peaks[0].maxPosition
     y0 = searching.peaks[0].maxValue
+    if valid11 == 0:
+        x0minL = searching.peaks[0].leftBorder
+        y0minL = searching.peaks[0].leftBorderValue
+    else:
+        x0minL = 0
+        y0minL = 0
+
+    if valid12 == 0:
+        x0minR = searching.peaks[0].rightBorder
+        y0minR = searching.peaks[0].rightBorderValue
+    else:
+        x0minR = 0
+        y0minR = 0
 
     x1 = searching.peaks[1].maxPosition
     y1 = searching.peaks[1].maxValue
@@ -45,6 +58,8 @@ if __name__ == '__main__':
     plt.xlim(0, 1000)
     plt.ylim(0, 10000)
     plt.scatter(x0, y0, 30, color='red')
-    plt.scatter(x1, y1, 30, color='green')
-    plt.scatter(x2, y2, 30, color='blue')
+    plt.scatter(x0minL, y0minL, 40, color='blue')
+    plt.scatter(x0minR, y0minR, 40, color='green')
+    plt.scatter(x1, y1, 30, color='red')
+    plt.scatter(x2, y2, 30, color='red')
 plt.show()

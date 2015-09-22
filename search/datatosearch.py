@@ -33,10 +33,7 @@ class DataToSearch:
         peak = SpectrumPeak()
         self.peaks.append(peak)
         self.valid0 = self.firstSearchToRight()
-        if self.valid0 == 0: # ok
-            return 0
-        else:
-            return -1
+        return self.valid0
 
     def level1(self):
         '''
@@ -55,13 +52,20 @@ class DataToSearch:
         self.actStart = self.peaks[0].maxPosition
         self.actEnd = self.start
         self.valid11 = self.searchToLeft(1, 0)
+        if(self.valid11 != 0):
+            self.peaks[0].leftBorder = self.start
+            self.peaks[0].leftBorderValue = self.data[self.start]
 
         # search from peak0 to right, to end
         self.actStart = self.peaks[0].maxPosition
         self.actEnd = self.end
         self.valid12 = self.searchToRight(2, 0)
+        if(self.valid12 != 0):
+            self.peaks[0].rightBorder = self.end
+            self.peaks[0].rightBorderValue = self.data[self.end]
 
-        return (self.valid11 + self.valid12)
+
+        return [self.valid11,  self.valid12]
 
     def level2(self):
         '''
@@ -109,7 +113,6 @@ class DataToSearch:
                     firstMinimumPosition = i
                 else:
                     firstMinimumFound = True
-                    retValue = 0
             else:
                 if value > maxValue:
                     maxValue = value
@@ -120,6 +123,10 @@ class DataToSearch:
             self.peaks[indexToFind].maxPosition = maxPosition
             self.peaks[indexToFind].maxValue = maxValue
             self.peaks[indexToFind].valid = True
+        if firstMinimumFound:
+            self.peaks[indexToUpdate].leftBorder = firstMinimumPosition
+            self.peaks[indexToUpdate].leftBorderValue = firstMinimum
+            retValue = 0
         return retValue
 
 
@@ -184,7 +191,6 @@ class DataToSearch:
                     firstMinimumPosition = i
                 else:
                     firstMinimumFound = True
-                    retValue = 0
             else:
                 if value > maxValue:
                     maxValue = value
@@ -195,4 +201,8 @@ class DataToSearch:
             self.peaks[indexToFind].maxPosition = maxPosition
             self.peaks[indexToFind].maxValue = maxValue
             self.peaks[indexToFind].valid = True
+        if firstMinimumFound:
+            self.peaks[indexToUpdate].rightBorder = firstMinimumPosition
+            self.peaks[indexToUpdate].rightBorderValue = firstMinimum
+            retValue = 0
         return retValue
