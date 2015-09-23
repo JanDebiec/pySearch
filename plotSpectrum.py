@@ -28,38 +28,32 @@ if __name__ == '__main__':
 
     x0 = searching.peaks[0].maxPosition
     y0 = searching.peaks[0].maxValue
-    if valid11 == 0:
-        x0minL = searching.peaks[0].leftBorder
-        y0minL = searching.peaks[0].leftBorderValue
-    else:
-        x0minL = 0
-        y0minL = 0
-
-    if valid12 == 0:
-        x0minR = searching.peaks[0].rightBorder
-        y0minR = searching.peaks[0].rightBorderValue
-    else:
-        x0minR = 0
-        y0minR = 0
-
-    x1 = searching.peaks[1].maxPosition
-    y1 = searching.peaks[1].maxValue
-
-    x2 = searching.peaks[2].maxPosition
-    y2 = searching.peaks[2].maxValue
-
-
 
     # plot results
     plt.plot(dataToPlot)
     plt.plot(dataAveragedToPlot)
-    plt.plot(x0, y0, "r")
     plt.xlabel('spectrum ' + fileName)
     plt.xlim(0, 1000)
     plt.ylim(0, 10000)
+
+    # peak 0
+    # plt.plot(x0, y0, "r")
     plt.scatter(x0, y0, 30, color='red')
-    plt.scatter(x0minL, y0minL, 40, color='blue')
-    plt.scatter(x0minR, y0minR, 40, color='green')
-    plt.scatter(x1, y1, 30, color='red')
-    plt.scatter(x2, y2, 30, color='red')
-plt.show()
+    if valid11 == 0:
+        x0minL = searching.peaks[0].leftBorder
+        y0minL = searching.peaks[0].leftBorderValue
+        plt.scatter(x0minL, y0minL, 40, color='red')
+        if searching.peaks[1].valid == True:
+            x1 = searching.peaks[1].maxPosition
+            y1 = searching.peaks[1].maxValue
+            plt.scatter(x1, y1, 30, color='blue')
+    if valid12 == 0:
+        x0minR = searching.peaks[0].rightBorder
+        y0minR = searching.peaks[0].rightBorderValue
+        plt.scatter(x0minR, y0minR, 40, color='red')
+        if searching.peaks[2].valid == True:
+            x2 = searching.peaks[2].maxPosition
+            y2 = searching.peaks[2].maxValue
+            plt.scatter(x2, y2, 30, color='green')
+
+    plt.show()
