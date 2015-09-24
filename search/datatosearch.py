@@ -19,6 +19,7 @@ class DataToSearch:
         self.valid22 = -1
         self.valid23 = -1
         self.valid24 = -1
+        self.indexToSecondPeak = -1
 
     def level0(self):
         '''
@@ -96,6 +97,10 @@ class DataToSearch:
 
         # validate peaks 1 and 2
         # find higher from both
+        if self.peaks[1].maxValue >= self.peaks[2].maxValue:
+            self.indexToSecondPeak = 1
+        else:
+            self.indexToSecondPeak = 2
 
         return [self.valid21, self.valid22, self.valid23, self.valid24]
 
