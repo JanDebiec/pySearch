@@ -72,28 +72,32 @@ class DataToSearch:
 
         :return:
         '''
-        # search from peak 1 to left
-        self.actStart = self.peaks[1].maxPosition
-        self.actEnd = self.start
-        self.valid21 = self.searchToLeft(3, 1)
+        if self.valid11 == 0:
+            # search from peak 1 to left
+            self.actStart = self.peaks[1].maxPosition
+            self.actEnd = self.start
+            self.valid21 = self.searchToLeft(3, 1)
 
-        # search from peak 1 to right, to peak 0
-        self.actStart = self.peaks[1].maxPosition
-        self.actEnd = self.peaks[0].leftBorder
-        self.valid22 = self.searchToRight(4, 1)
+            # search from peak 1 to right, to peak 0
+            self.actStart = self.peaks[1].maxPosition
+            self.actEnd = self.peaks[0].leftBorder
+            self.valid22 = self.searchToRight(4, 1)
 
-        # search from peak 2 to left, to peak 0
-        self.actStart = self.peaks[2].maxPosition
-        self.actEnd = self.peaks[0].rightBorder
-        self.valid23 = self.searchToLeft(5, 2)
+        if self.valid12 == 0:
+            # search from peak 2 to left, to peak 0
+            self.actStart = self.peaks[2].maxPosition
+            self.actEnd = self.peaks[0].rightBorder
+            self.valid23 = self.searchToLeft(5, 2)
 
-        # search fr0m peak 2 to right, to end
-        self.actStart = self.peaks[2].maxPosition
-        self.actEnd = self.end
-        self.valid24 = self.searchToRight(6, 2)
+            # search fr0m peak 2 to right, to end
+            self.actStart = self.peaks[2].maxPosition
+            self.actEnd = self.end
+            self.valid24 = self.searchToRight(6, 2)
 
         # validate peaks 1 and 2
         # find higher from both
+
+        return [self.valid21, self.valid22, self.valid23, self.valid24]
 
     def searchToLeft(self, indexToFind, indexToUpdate):
         peak = SpectrumPeak()
