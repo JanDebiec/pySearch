@@ -1,19 +1,24 @@
-import sys
+#import sys
+# import getopt
+
 from search import datatosearch
 
 __author__ = 'jan'
 import spkspectrum
 import matplotlib.pyplot as plt
 
-if __name__ == '__main__':
-    print sys.argv
+# if __name__ == '__main__':
+#     print sys.argv
 
-    fileName = 'spectra/0016_Schichtdicke,konfokal_14kHz_LAI100.spk'
-    # fileName = sys.argv[1]
-    # filename os parameter, runs only in pyCharm
-    # from console, calleing python plt...py does't work
-    spectrum = spkspectrum.SpkSpectrum(fileName)
-    data = spectrum.read(830)
+    # fileName = 'spectra/0016_Schichtdicke,konfokal_14kHz_LAI100.spk'
+    # # fileName = sys.argv[1]
+    # # filename os parameter, runs only in pyCharm
+    # # from console, calleing python plt...py does't work
+    # spectrum = spkspectrum.SpkSpectrum(fileName)
+    # data = spectrum.read(830)
+
+
+def analyzeSpectrum(data):
     dataToPlot = data[:]
 
     # moving average size 5, odd can be better to understand, worse to divide
@@ -26,6 +31,7 @@ if __name__ == '__main__':
         [valid11, valid12] = searching.level1()
         [valid21, valid22, valid23, valid24] = searching.level2()
 
+def plotSpectrum():
     x0 = searching.peaks[0].maxPosition
     y0 = searching.peaks[0].maxValue
 
