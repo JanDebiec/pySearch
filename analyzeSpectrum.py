@@ -14,7 +14,7 @@ def readSpectrum(fileName):
     data = []
     try:
         spectrum = spkspectrum.SpkSpectrum(fileName)
-        data = spectrum.read(830)
+        # data = spectrum.read(830)
     except:
         print 'can not read file ' + fileName
     return spectrum
@@ -50,8 +50,8 @@ def main():
     fileName = getFileName()
     spectrum = readSpectrum(fileName)
     data = spectrum.read(830)
-    if len(data)> 0:
-        plotS = plotSpectrum.PlotSpectrum()
+    if len(data) > 0:
+        plotS = plotSpectrum.PlotSpectrum(data)
         plotS.analyzeSpectrum(spectrum)
         # plotSpectrum.PlotSpectrum.analyzeSpectrum(spectrum)
         plotS.plotSpectrum()

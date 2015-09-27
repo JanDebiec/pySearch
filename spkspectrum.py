@@ -19,7 +19,11 @@ class SpkSpectrum:
                 value = string.atoi(line)
                 self.data.append(value)
             i = i + 1
-        self.dataSize = len(self.data)
+        readLength = len(self.data)
+        if(readLength <= limit):
+            self.dataSize = readLength
+        else:
+            self.dataSize = len(self.data)
         for y in range(20):
             self.data[y] = 0
         return self.data
