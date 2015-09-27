@@ -17,7 +17,7 @@ def readSpectrum(fileName):
         data = spectrum.read(830)
     except:
         print 'can not read file ' + fileName
-    return data
+    return spectrum
 
 def getFileName():
     fileName = ''
@@ -48,10 +48,14 @@ def usage():
 
 def main():
     fileName = getFileName()
-    data = readSpectrum(fileName)
+    spectrum = readSpectrum(fileName)
+    data = spectrum.read(830)
     if len(data)> 0:
-        plotSpectrum.analyzeSpectrum(data)
-        plotSpectrum.plotSpectrum()
+        plotS = plotSpectrum.PlotSpectrum()
+        plotS.analyzeSpectrum(spectrum)
+        # plotSpectrum.PlotSpectrum.analyzeSpectrum(spectrum)
+        plotS.plotSpectrum()
+        # plotSpectrum.PlotSpectrum.plotSpectrum()
 
 if __name__ == '__main__':
     main()
