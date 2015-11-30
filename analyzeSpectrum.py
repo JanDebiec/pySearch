@@ -46,6 +46,15 @@ def getFileName():
 def usage():
     print "analyzeSpectrum -fFileName"
 
+def listFilesInFolders(folder, extension):
+    filesList = []
+    for root, dirs, files in os.walk(folder):
+        for file in files:
+            if file.endswith("." + extension):
+                fileName = os.path.join(root, file)
+                print(fileName)
+                filesList.append(fileName)
+
 def main():
     fileName = getFileName()
     spectrum = readSpectrum(fileName)
